@@ -10,3 +10,12 @@ product-list, product-detail, order-list, order-detail
 checkout, shopping cart
 
 
+
+git status # ozgarishlarni korish
+git add data.txt  # data.txt qoshish
+git add .  # barcha ozgartirilgan fayllarni qoshish
+
+git commit -m "xabar yoziladi"  # commit qilish
+git pull # serverdan malumot olish
+git push # serverga malumotni yuborish
+git merge main # branchlarni birlashtirish
