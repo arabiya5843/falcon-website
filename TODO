@@ -1,0 +1,12 @@
+#branch-1
+user modelni tuzish
+auth, settings, login, register, reset password, logout pages + pochtaga yuborish
+html -> jinja
+
+#branch-2
+model qismini tuzish
+product, cart, favourite, category, order, notification
+product-list, product-detail, order-list, order-detail
+checkout, shopping cart
+
+
