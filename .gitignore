@@ -127,6 +127,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+data.txt
 
 # Spyder project settings
 .spyderproject
@@ -156,3 +157,5 @@ public/
 
 db.sqlite3
 .env
+
+.idea
