@@ -19,3 +19,5 @@ git commit -m "xabar yoziladi"  # commit qilish
 git pull # serverdan malumot olish
 git push # serverga malumotni yuborish
 git merge main # branchlarni birlashtirish
+
+Modellani bolilik
