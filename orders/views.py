@@ -4,10 +4,11 @@ from django.shortcuts import render
 
 # Create your views here.
 
-class FirstView(ListView):
-    model = FirstView
-    template_name = "index.html"
-
+# class FirstView(ListView):
+#     model = FirstView
+#     template_name = "index.html"
+def index(request):
+    return render(request, 'inbox.html')
 
 
 def base(request):
@@ -34,9 +35,6 @@ def inbox(request):
 
     return render(request, "inbox.html")
 
-def index(request):
-
-    return render(request, "index.html")
 
 def login(request):
 
