@@ -4,6 +4,6 @@ from auth.views import *
 
 app_name = 'auth'
 urlpatterns = [
-    path('login/', login, name='register'),
+    path('login/', login, name='login'),
     path('register/', register, name='register'),
 ]
