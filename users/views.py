@@ -1,17 +1,22 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import FormView, TemplateView
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 
-from orders.models import Product
+from orders.models import Product, Favourite
 from users.forms import AuthLoginForm, CustomUserCreationForm
 from users.mixins import AuthUserMixin
 
 
-class IndexView(TemplateView):
-    template_name = 'index.html'
+class LandingView(TemplateView):
+    template_name = 'landing.html'
+
+
+class DashboardView(LoginRequiredMixin, TemplateView):
+    template_name = 'dashboard.html'
 
 
 # class ProductListView(ListView):
