@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load check %}
 
 {% block title %}
     Product Detail Page
@@ -83,13 +84,29 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-auto px-2 px-md-3"><a class="btn btn-sm btn-primary" href="#!"><span
-                                class="fas fa-cart-plus me-sm-2"></span><span class="d-none d-sm-inline-block">Add To Cart</span></a>
+                        <div class="col-auto px-2 px-md-3">
+                            <a class="btn btn-sm btn-{% if product|has_cart:user %}success{% else %}primary{% endif %}"
+                               href="{% url 'add-cart' product.pk %}?url={% url 'product_detail' product.slug %}">
+                                <span class="fas fa-cart-plus me-sm-2"></span>
+                                <span class="d-none d-sm-inline-block">
+                                       {% if product|has_cart:user %}
+                                           Added
+                                       {% else %}
+                                           Add to Cart
+                                       {% endif %}>
+                                </span>
+                            </a>
                         </div>
-                        <div class="col-auto px-0"><a class="btn btn-sm btn-outline-danger border-300" href="#!"
-                                                      data-bs-toggle="tooltip" data-bs-placement="top"
-                                                      title="Add to Wish List"><span
-                                class="far fa-heart me-1"></span>282</a></div>
+                        <div class="col-auto px-0">
+                            <a class="btn btn-sm btn-outline-danger border-300"
+                               href="{% url 'add_favourite' product.pk %}?url={% url 'product_detail' product.slug %}"
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                               title="Add to Wish List"
+                               {% if product|has_fav:user %}style="background-color: #e63757; color: #fff;" {% endif %}>
+                                <span class="far fa-heart me-1"></span>
+                                {{ product.favourite_set.count }}
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

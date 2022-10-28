@@ -8,12 +8,8 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError('Users must have an email address')
 
-        count = User.objects.count()
-        username = f'user-{count + 1}'
-
         user = self.model(
             email=self.normalize_email(email),
-            username=username,
         )
 
         user.set_password(password)
@@ -39,3 +35,13 @@ class User(AbstractUser):
 
     REQUIRED_FIELDS = []
     USERNAME_FIELD = 'email'
+
+    def save(self, *args, **kwargs):
+
+        count = User.objects.count()
+        while User.objects.filter(pk=count).exists():
+            count += 1
+        self.username = f'user-{count + 1}'
+
+        super().save(*args, **kwargs)
+

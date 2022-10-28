@@ -193,7 +193,7 @@
                             <!-- more inner pages-->
                             <ul class="nav collapse show" id="product">
                                 <li class="nav-item"><a class="nav-link active"
-                                                        href="{% url 'product_list' %}"
+                                                        href="../{% url 'product_list' %}"
                                                         aria-expanded="false">
                                     <div class="d-flex align-items-center"><span
                                             class="nav-link-text ps-1">Product list</span>
@@ -211,7 +211,7 @@
                                     <!-- more inner pages-->
                                 </li>
                                 <li class="nav-item"><a class="nav-link"
-                                                        href="#"
+                                                        href="../../../app/e-commerce/product/product-details.html"
                                                         aria-expanded="false">
                                     <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Product details</span>
                                     </div>
@@ -266,7 +266,7 @@
                             <!-- more inner pages-->
                         </li>
                         <li class="nav-item"><a class="nav-link"
-                                                href="../../../app/e-commerce/shopping-cart.html"
+                                                href="{% url 'cart' %}"
                                                 aria-expanded="false">
                             <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Shopping cart</span>
                             </div>
