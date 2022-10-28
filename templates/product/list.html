@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load check %}
 
 {% block title %}
     Product List Page
@@ -48,7 +49,7 @@
                                 <div class="position-relative h-sm-100">
                                     <a class="d-block h-100" href="{% url 'product_detail' product.slug %}">
                                         <img class="img-fluid fit-cover w-sm-100 h-sm-100 rounded-1 absolute-sm-centered"
-                                             src="{% static 'orders/assets/img/products/2.jpg' %}" alt=""/>
+                                             src="{{ product.image.url }}" alt=""/>
                                     </a>
                                     <div class="badge rounded-pill bg-success position-absolute top-0 end-0 me-2 mt-2 fs--2 z-index-2">
                                         New
@@ -60,18 +61,17 @@
                                     <div class="col-lg-8">
                                         <h5 class="mt-3 mt-sm-0">
                                             <a class="text-dark fs-0 fs-lg-1"
-                                               href="{% url 'product_detail' product.slug %}">Apple
-                                                iMac Pro (27-inch with Retina 5K Display, 3.0GHz 10-core Intel Xeon W,
-                                                1TB
-                                                SSD)</a>
+                                               href="{% url 'product_detail' product.slug %}">
+                                                {{ product.name }}
+                                            </a>
                                         </h5>
                                         <p class="fs--1 mb-2 mb-md-3"><a class="text-500" href="#!">Computer &amp;
                                             Accessories</a></p>
                                         <ul class="list-unstyled d-none d-lg-block">
                                             {% for key, value in product.spec.items %}
                                                 <li>
-                                                    <span class="fas fa-circle"
-                                                          data-fa-transform="shrink-12"></span><span>{{ value }}</span>
+                                                    <span class="fas fa-circle" data-fa-transform="shrink-12"></span>
+                                                    <span>{{ value }}</span>
                                                 </li>
                                             {% endfor %}
                                         </ul>
@@ -100,18 +100,24 @@
                                         </div>
                                         <div class="mt-2">
                                             <a class="btn btn-sm btn-outline-secondary border-300 d-lg-block me-2 me-lg-0"
-                                               href="{% url 'add_favourite' product.id %}">
-                                                {% if product.favourite_set.exists %}
+                                               href="{% url 'add_favourite' product.id %}?url={% url 'product_list' %}">
+                                                {% if product|has_fav:user %}
                                                     <span class="fa fa-heart" style="color: red"></span>
                                                 {% else %}
                                                     <span class="far fa-heart"></span>
                                                 {% endif %}
                                                 <span class="ms-2 d-none d-md-inline-block">Favourite</span>
                                             </a>
-                                            <a class="btn btn-sm btn-primary d-lg-block mt-lg-2"
-                                               href="#">
-                                                <span class="fas fa-cart-plus"> </span>
-                                                <span class="ms-2 d-none d-md-inline-block">Add to Cart</span>
+                                            <a class="btn btn-sm btn-{% if product|has_cart:user %}success{% else %}primary{% endif %} d-lg-block mt-lg-2"
+                                               href="{% url 'add-cart' product.pk %}?url={% url 'product_list' %}">
+                                                <span class="fas fa-cart-plus"></span>
+                                                <span class="ms-2 d-none d-md-inline-block">
+                                                    {% if product|has_cart:user %}
+                                                        Added
+                                                    {% else %}
+                                                        Add to Cart
+                                                    {% endif %}>
+                                                </span>
                                             </a>
                                         </div>
                                     </div>

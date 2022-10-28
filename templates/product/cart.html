@@ -2,7 +2,7 @@
 {% load  static %}
 
 {% block title %}
-    Favourite Products Page
+    Cart Page
 {% endblock %}
 
 {% block main_content %}
@@ -10,10 +10,11 @@
         <div class="card-header">
             <div class="row justify-content-between">
                 <div class="col-md-auto">
-                    <h5 class="mb-3 mb-md-0">Favourite Products ({{ favourites.count }} Items)</h5>
+                    <h5 class="mb-3 mb-md-0">Shopping Cart ({{ carts.count }} Items)</h5>
                 </div>
                 <div class="col-md-auto">
-                    <a class="btn btn-sm btn-outline-secondary border-300 me-2" href="{% url 'product_list' %}">
+                    <a class="btn btn-sm btn-outline-secondary border-300 me-2"
+                       href="{% url 'product_list' %}">
                         <svg class="svg-inline--fa fa-chevron-left fa-w-10 me-1" data-fa-transform="shrink-4"
                              aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img"
                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""
@@ -27,7 +28,8 @@
                             </g>
                         </svg>
                         <!-- <span class="fas fa-chevron-left me-1" data-fa-transform="shrink-4"></span> Font Awesome fontawesome.com -->
-                        Continue Shopping</a>
+                        Continue Shopping
+                    </a>
                     <a class="btn btn-sm btn-primary" href="../../app/e-commerce/checkout.html">Checkout</a>
                 </div>
             </div>
@@ -42,30 +44,31 @@
                     </div>
                 </div>
             </div>
-            {% for favourite in favourites %}
+            {% for cart in carts %}
                 <div class="row gx-card mx-0 align-items-center border-bottom border-200">
                     <div class="col-8 py-3">
                         <div class="d-flex align-items-center">
-                            <a href="{% url 'product_detail' favourite.product.slug %}">
+                            <a href="{% url 'product_detail' cart.product.slug %}">
                                 <img class="img-fluid rounded-1 me-3 d-none d-md-block"
-                                     src="{% static 'orders/assets/img/products/1.jpg' %}"
-                                     alt="" width="60">
+                                     src="{{ cart.product.image.url }}" alt="" width="60">
                             </a>
                             <div class="flex-1">
                                 <h5 class="fs-0">
-                                    <a class="text-900" href="{% url 'product_detail' favourite.product.slug %}">
-                                        {{ favourite.product.name }}
+                                    <a class="text-900" href="{% url 'product_detail' cart.product.slug %}">
+                                        {{ cart.product.name }}
                                     </a>
                                 </h5>
                                 <div class="fs--2 fs-md--1">
-                                    <a class="text-danger" href="{% url 'add_favourite' favourite.product.id %}?url={% url 'favourite' %}">Remove</a>
+                                    <a class="text-danger" href="{% url 'add-cart' cart.product.pk %}?url={% url 'cart' %}">
+                                        Remove
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-4 py-3">
                         <div class="row align-items-center">
-                            <div class="col-md-8 d-flex justify-content-end justify-content-md-center order-1 order-md-0">
+                            <div class="col-md-7 d-flex justify-content-end justify-content-md-center order-1 order-md-0">
                                 <div>
                                     <div class="input-group input-group-sm flex-nowrap" data-quantity="data-quantity">
                                         <button class="btn btn-sm btn-outline-secondary border-300 px-2"
@@ -83,13 +86,30 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">${{ favourite.product.price }}</div>
+                            <div class="col-md-5 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">
+                                ${{ cart.real_price|stringformat:"f"|slice:":-4" }}</div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
+            <div class="row fw-bold gx-card mx-0">
+                <div class="col-9 col-md-8 py-2 text-end text-900">Total</div>
+                <div class="col px-0">
+                    <div class="row gx-card mx-0">
+                        <div class="col-md-7 py-2 d-none d-md-block text-center">{{ carts.count }} (items)</div>
+                        <div class="col-12 col-md-5 text-end py-2">
+                            ${{ total_price|stringformat:"f"|slice:":-4" }}</div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-footer bg-light d-flex justify-content-end">
+            <form class="me-3">
+                <div class="input-group input-group-sm">
+                    <input class="form-control" type="text" placeholder="Promocode">
+                    <button class="btn btn-outline-secondary border-300 btn-sm" type="submit">Apply</button>
+                </div>
+            </form>
             <a class="btn btn-sm btn-primary" href="../../app/e-commerce/checkout.html">Checkout</a>
         </div>
     </div>
