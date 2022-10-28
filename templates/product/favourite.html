@@ -37,7 +37,6 @@
                 <div class="col-9 col-md-8 py-2">Name</div>
                 <div class="col-3 col-md-4">
                     <div class="row">
-                        <div class="col-md-8 py-2 d-none d-md-block text-center">Quantity</div>
                         <div class="col-12 col-md-4 text-end py-2">Price</div>
                     </div>
                 </div>
@@ -53,9 +52,10 @@
                             </a>
                             <div class="flex-1">
                                 <h5 class="fs-0">
-                                    <a class="text-900" href="{% url 'product_detail' favourite.product.slug %}">Apple
-                                        MacBook
-                                        Pro 15" Z0V20008N: 2.9GHz 6-core 8th-Gen Intel Core i9, 32GB RAM</a>
+                                    <a class="text-900" href="{% url 'product_detail' favourite.product.slug %}">
+                                        {% for key, value in favourite.product.spec.items %}
+                                            {{ value }}
+                                        {% endfor %}</a>
                                 </h5>
                                 <div class="fs--2 fs-md--1">
                                     <a class="text-danger" href="{% url 'delete_favourite' favourite.id %}">Remove</a>
@@ -65,25 +65,8 @@
                     </div>
                     <div class="col-4 py-3">
                         <div class="row align-items-center">
-                            <div class="col-md-8 d-flex justify-content-end justify-content-md-center order-1 order-md-0">
-                                <div>
-                                    <div class="input-group input-group-sm flex-nowrap" data-quantity="data-quantity">
-                                        <button class="btn btn-sm btn-outline-secondary border-300 px-2"
-                                                data-type="minus">
-                                            -
-                                        </button>
-                                        <input class="form-control text-center px-2 input-spin-none" type="number"
-                                               min="1"
-                                               value="1" aria-label="Amount (to the nearest dollar)"
-                                               style="width: 50px">
-                                        <button class="btn btn-sm btn-outline-secondary border-300 px-2"
-                                                data-type="plus">
-                                            +
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">$1292</div>
+                            <div class="col-md-4 text-end ps-0 order-0 order-md-1 mb-2 mb-md-0 text-600">$
+                                {{ favourite.product.price }}</div>
                         </div>
                     </div>
                 </div>

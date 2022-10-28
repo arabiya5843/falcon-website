@@ -80,9 +80,9 @@ AUTH_USER_MODEL = 'users.User'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'p4_task_db',
+        'NAME': 'falcon',
         'USER': 'postgres',
-        'PASSWORD': '1',
+        'PASSWORD': 'clubwinx',
         'HOST': 'localhost',
         'PORT': '5432',
     }

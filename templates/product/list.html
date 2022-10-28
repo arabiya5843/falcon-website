@@ -65,8 +65,8 @@
                                                 1TB
                                                 SSD)</a>
                                         </h5>
-                                        <p class="fs--1 mb-2 mb-md-3"><a class="text-500" href="#!">Computer &amp;
-                                            Accessories</a></p>
+                                        <p class="fs--1 mb-2 mb-md-3"><a class="text-500" href="#!">
+                                            {{ product.category }}</a></p>
                                         <ul class="list-unstyled d-none d-lg-block">
                                             {% for key, value in product.spec.items %}
                                                 <li>
@@ -109,7 +109,7 @@
                                                 <span class="ms-2 d-none d-md-inline-block">Favourite</span>
                                             </a>
                                             <a class="btn btn-sm btn-primary d-lg-block mt-lg-2"
-                                               href="#">
+                                               href="{% url 'add_cart' product.id %}">
                                                 <span class="fas fa-cart-plus"> </span>
                                                 <span class="ms-2 d-none d-md-inline-block">Add to Cart</span>
                                             </a>
@@ -130,8 +130,12 @@
                 class="btn btn-sm btn-falcon-default me-2" href="#!">2</a><a class="btn btn-sm btn-falcon-default me-2"
                                                                              href="#!"><span
                 class="fas fa-ellipsis-h"></span></a><a class="btn btn-sm btn-falcon-default me-2" href="#!">35</a>
-            <button class="btn btn-falcon-default btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Next"><span class="fas fa-chevron-right"></span></button>
+            {% if page_obj.has_next %}
+                <button class="btn btn-falcon-default btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Next"><span class="fas fa-chevron-right"></span>
+                <a class="btn btn-sm btn-falcon-default text-primary me-2" href="?page={{ page_obj.next_page_number }}"></a></button>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
+
