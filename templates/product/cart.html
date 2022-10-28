@@ -32,7 +32,7 @@
                       <div class="d-flex align-items-center">
                           <a href="{% url 'product_detail' cart.product.slug %}">
                               <img class="img-fluid rounded-1 me-3 d-none d-md-block"
-                               src="{% static 'orders/assets/img/products/1.jpg' %}" alt="" width="60"></a>
+                               src="{{ cart.product.image.url }}" alt="" width="60"></a>
                         <div class="flex-1">
                           <h5 class="fs-0"><a class="text-900" href="{% url 'product_detail' cart.product.slug %}">
                               {% for key, value in cart.product.spec.items %}

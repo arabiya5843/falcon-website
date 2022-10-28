@@ -130,11 +130,10 @@
                 class="btn btn-sm btn-falcon-default me-2" href="#!">2</a><a class="btn btn-sm btn-falcon-default me-2"
                                                                              href="#!"><span
                 class="fas fa-ellipsis-h"></span></a><a class="btn btn-sm btn-falcon-default me-2" href="#!">35</a>
-            {% if page_obj.has_next %}
                 <button class="btn btn-falcon-default btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="top"
                     title="Next"><span class="fas fa-chevron-right"></span>
-                <a class="btn btn-sm btn-falcon-default text-primary me-2" href="?page={{ page_obj.next_page_number }}"></a></button>
-            {% endif %}
+                <a class="btn btn-sm btn-falcon-default text-primary me-2" href="#"></a></button>
+
         </div>
     </div>
 {% endblock %}

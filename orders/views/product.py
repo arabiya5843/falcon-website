@@ -16,7 +16,7 @@ class ProductListView(ListView):
     '''
     select * from products order by created_at desc
     '''
-    paginate_by = 1
+
     model = Product
     template_name = 'product/list.html'
 

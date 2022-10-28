@@ -47,4 +47,9 @@ class Favourite(Base):
 class Cart(Base):
     product = ForeignKey('orders.Product', CASCADE)
     user = ForeignKey('users.User', CASCADE)
+    quantity = SmallIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.id} {self.product} {self.quantity}"
+
 
