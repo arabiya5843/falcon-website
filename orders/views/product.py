@@ -1,10 +1,19 @@
+from datetime import date
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import F
-from django.shortcuts import redirect
+from django.core.mail import send_mail
+from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView, View
 
 from orders.models import Product, Favourite, Cart
 
+
+def error_404_page(request, error):
+    render(request, '404.html', status=404)
+
+def error_500_page(request, error):
+    render(request, '500.html', status=500)
 
 class ProductDetailView(DetailView):
     model = Product
@@ -16,6 +25,8 @@ class ProductListView(ListView):
     queryset = Product.objects.order_by('-created_at')
     model = Product
     template_name = 'product/list.html'
+
+    paginate_by = 2
 
 
 class FavouriteListView(LoginRequiredMixin, ListView):
@@ -66,3 +77,6 @@ class AddFavouriteView(View):
         if not created:
             favourite.delete()
         return redirect(request.GET.get('url', 'product_list'))
+
+
+
